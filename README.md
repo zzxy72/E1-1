@@ -292,15 +292,88 @@ docker stats --no-stream
 실습 후 교체:
 
 ```bash
-# 여기에 실제 명령과 출력 결과를 붙여넣는다.
+keytest1591@c3r1s7 E1-1 % 
+keytest1591@c3r1s7 E1-1 % docker pull hello-world
+Using default tag: latest
+latest: Pulling from library/hello-world
+4f55086f7dd0: Pull complete 
+Digest: sha256:452a468a4bf985040037cb6d5392410206e47db9bf5b7278d281f94d1c2d0931
+Status: Downloaded newer image for hello-world:latest
+docker.io/library/hello-world:latest
+keytest1591@c3r1s7 E1-1 % docker images
+REPOSITORY    TAG       IMAGE ID       CREATED      SIZE
+hello-world   latest    e2ac70e7319a   8 days ago   10.1kB
+keytest1591@c3r1s7 E1-1 % docker rm -f hello-test 2>/dev/null || true
+keytest1591@c3r1s7 E1-1 % docker run --name hello-test hello-world
+
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+    (amd64)
+ 3. The Docker daemon created a new container from that image which runs the
+    executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+    to your terminal.
+
+To try something more ambitious, you can run an Ubuntu container with:
+ $ docker run -it ubuntu bash
+
+Share images, automate workflows, and more with a free Docker ID:
+ https://hub.docker.com/
+
+For more examples and ideas, visit:
+ https://docs.docker.com/get-started/
+
+keytest1591@c3r1s7 E1-1 % docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+keytest1591@c3r1s7 E1-1 % docker ps -a
+CONTAINER ID   IMAGE         COMMAND    CREATED          STATUS                      PORTS     NAMES
+2659efcff4c4   hello-world   "/hello"   32 seconds ago   Exited (0) 31 seconds ago             hello-test
+keytest1591@c3r1s7 E1-1 % docker logs hello-test
+
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+    (amd64)
+ 3. The Docker daemon created a new container from that image which runs the
+    executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+    to your terminal.
+
+To try something more ambitious, you can run an Ubuntu container with:
+ $ docker run -it ubuntu bash
+
+Share images, automate workflows, and more with a free Docker ID:
+ https://hub.docker.com/
+
+For more examples and ideas, visit:
+ https://docs.docker.com/get-started/
+
+keytest1591@c3r1s7 E1-1 % docker stats --no-stream
+CONTAINER ID   NAME      CPU %     MEM USAGE / LIMIT   MEM %     NET I/O   BLOCK I/O   PIDS
+keytest1591@c3r1s7 E1-1 % 
+
 ```
 
 해설:
-
+* docker pull hello-world 이 명령어는 Docker Hub(온라인 저장소)에서 'hello-world'라는 이미지를 다운로드하는 것입니다.
 * `hello-world`는 Docker 공식 테스트용 이미지다.
+* docker images 이 명령어는 당신의 컴퓨터에 저장된 모든 Docker 이미지를 목록으로 보여줍니다.
+* Docker 이미지 = 프로그램을 실행하기 위한 설계도 또는 템플릿. 
+* docker rm -f hello-test 2>/dev/null || true 
+  - "hello-test라는 컨테이너를 강제로 삭제하되, 에러가 나도 무시하고 계속 진행하라"
 * `docker ps`는 실행 중 컨테이너만 보여준다.
 * `hello-world`는 실행 후 바로 종료되므로 `docker ps`에는 안 보일 수 있다.
 * 종료된 컨테이너는 `docker ps -a`에서, 출력 내용은 `docker logs hello-test`에서 확인한다.
+* docker stats --no-stream  
+  - "현재 실행 중인 모든 컨테이너의 자원 사용량을 한 번만 보여줘"
+
 
 ## 5. 컨테이너 실행 실습
 
@@ -320,12 +393,67 @@ docker rm -f hello-test 2>/dev/null || true
 docker run --name hello-test hello-world
 docker ps -a
 docker logs hello-test
+
 ```
 
 실습 후 교체:
 
 ```bash
-# 여기에 실제 로그를 붙여넣는다.
+keytest1591@c3r1s7 E1-1 % 
+keytest1591@c3r1s7 E1-1 % docker rm -f hello-test 2>/dev/null || true
+docker run --name hello-test hello-world
+docker ps -a
+docker logs hello-test
+hello-test
+
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+    (amd64)
+ 3. The Docker daemon created a new container from that image which runs the
+    executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+    to your terminal.
+
+To try something more ambitious, you can run an Ubuntu container with:
+ $ docker run -it ubuntu bash
+
+Share images, automate workflows, and more with a free Docker ID:
+ https://hub.docker.com/
+
+For more examples and ideas, visit:
+ https://docs.docker.com/get-started/
+
+CONTAINER ID   IMAGE         COMMAND    CREATED        STATUS                              PORTS     NAMES
+3c5e84e0987a   hello-world   "/hello"   1 second ago   Exited (0) Less than a second ago             hello-test
+
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+    (amd64)
+ 3. The Docker daemon created a new container from that image which runs the
+    executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+    to your terminal.
+
+To try something more ambitious, you can run an Ubuntu container with:
+ $ docker run -it ubuntu bash
+
+Share images, automate workflows, and more with a free Docker ID:
+ https://hub.docker.com/
+
+For more examples and ideas, visit:
+ https://docs.docker.com/get-started/
+
+keytest1591@c3r1s7 E1-1 % 
+
+
 ```
 
 ### 5.2 ubuntu 컨테이너 내부 진입
@@ -344,22 +472,102 @@ docker ps -a
 실습 후 교체:
 
 ```bash
-# 여기에 실제 로그를 붙여넣는다.
+keytest1591@c3r1s7 E1-1 % 
+keytest1591@c3r1s7 E1-1 % docker rm -f ubuntu-test 2>/dev/null || true
+docker run -it --name ubuntu-test ubuntu bash
+Unable to find image 'ubuntu:latest' locally
+latest: Pulling from library/ubuntu
+817807f3c64e: Pull complete 
+Digest: sha256:186072bba1b2f436cbb91ef2567abca677337cfc786c86e107d25b7072feef0c
+Status: Downloaded newer image for ubuntu:latest
+root@f375ae595e47:/# 
+root@f375ae595e47:/# #
+root@f375ae595e47:/# ls
+bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
+root@f375ae595e47:/# echo "inside container"
+inside container
+root@f375ae595e47:/# 
+root@f375ae595e47:/# #
+root@f375ae595e47:/# exit
+exit
+keytest1591@c3r1s7 E1-1 % 
+keytest1591@c3r1s7 E1-1 % docker ps -a
+CONTAINER ID   IMAGE         COMMAND    CREATED              STATUS                      PORTS     NAMES
+f375ae595e47   ubuntu        "bash"     About a minute ago   Exited (0) 21 seconds ago             ubuntu-test
+849e87b44b28   hello-world   "/hello"   18 minutes ago       Exited (0) 18 minutes ago             hello-test
+keytest1591@c3r1s7 E1-1 % 
+
 ```
 
 간단 정리:
+* docker run -it : 입력도 받고 (-i) 터미널 화면도 제대로 보임 (-t)
 
-* `attach`는 메인 프로세스에 연결하는 개념이다.
-* `exec`는 실행 중인 컨테이너 안에서 새 명령을 여는 개념이다.
 
 ## 6. Dockerfile 기반 커스텀 이미지 제작
 
+실습 전 준비:
+
+* 현재 오류 원인: `docker build -t my-web:1.0 .` 를 실행한 폴더에 `Dockerfile`이 없어서 빌드가 실패할 수 있다.
+* 따라서 `Dockerfile`과 웹 테스트용 `index.html`을 만든 뒤 빌드를 진행한다.
+
 실습 후 작성:
 
-* 베이스 이미지: `실습 후 교체`
-* 선택 이유: `실습 후 교체`
-* 커스텀 포인트: `실습 후 교체`
-* 목적: `실습 후 교체`
+* 베이스 이미지: `nginx:alpine`
+* 선택 이유: `가볍고 정적 웹 페이지 테스트에 적합함`
+* 커스텀 포인트: `기본 nginx 웹 루트에 index.html 복사`
+* 목적: `Dockerfile 빌드, 이미지 생성, 컨테이너 실행, 포트 매핑 확인`
+
+실습할 파일 준비:
+
+`Dockerfile`
+
+```Dockerfile
+FROM nginx:alpine
+COPY index.html /usr/share/nginx/html/index.html
+```
+
+`index.html`
+
+```html
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>my-web</title>
+</head>
+<body>
+  <h1>Hello Docker</h1>
+  <p>custom nginx container is running</p>
+</body>
+</html>
+```
+
+파일 생성 실습 명령:
+
+```bash
+cat > Dockerfile <<'EOF'
+FROM nginx:alpine
+COPY index.html /usr/share/nginx/html/index.html
+EOF
+
+cat > index.html <<'EOF'
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>my-web</title>
+</head>
+<body>
+  <h1>Hello Docker</h1>
+  <p>custom nginx container is running</p>
+</body>
+</html>
+EOF
+
+ls -la
+cat Dockerfile
+cat index.html
+```
 
 실습할 명령:
 
@@ -374,7 +582,141 @@ docker logs my-web
 실습 후 교체:
 
 ```bash
-# 여기에 실제 빌드/실행 로그를 붙여넣는다.
+keytest1591@c3r1s7 E1-1 % 
+keytest1591@c3r1s7 E1-1 % 
+keytest1591@c3r1s7 E1-1 % docker rm -f my-web 2>/dev/null || true
+docker build -t my-web:1.0 .
+[+] Building 0.5s (1/1) FINISHED                                                                                   docker:orbstack
+ => [internal] load build definition from Dockerfile                                                                          0.2s
+ => => transferring dockerfile: 2B                                                                                            0.0s
+ERROR: failed to build: failed to solve: failed to read dockerfile: open Dockerfile: no such file or directory
+keytest1591@c3r1s7 E1-1 % 
+keytest1591@c3r1s7 E1-1 % 
+keytest1591@c3r1s7 E1-1 % pwd
+ls -la
+find . -maxdepth 2 -name Dockerfile
+/Users/keytest1591/E1-1
+total 88
+drwxr-xr-x   6 keytest1591  keytest1591    192 Apr  1 15:29 .
+drwxr-x---+ 24 keytest1591  keytest1591    768 Apr  1 14:20 ..
+drwxr-xr-x  14 keytest1591  keytest1591    448 Apr  1 14:03 .git
+-rw-r--r--   1 keytest1591  keytest1591  18921 Apr  1 15:29 README copy.md
+-rw-r--r--   1 keytest1591  keytest1591  22674 Apr  1 15:36 README.md
+drwxr-xr-x   3 keytest1591  keytest1591     96 Apr  1 13:59 요구사항
+keytest1591@c3r1s7 E1-1 % cat > Dockerfile <<'EOF'
+FROM nginx:alpine
+COPY index.html /usr/share/nginx/html/index.html
+EOF
+
+cat > index.html <<'EOF'
+<h1>Hello Docker</h1>
+EOF
+
+keytest1591@c3r1s7 E1-1 % ls -la
+total 104
+drwxr-xr-x   8 keytest1591  keytest1591    256 Apr  1 15:47 .
+drwxr-x---+ 24 keytest1591  keytest1591    768 Apr  1 14:20 ..
+drwxr-xr-x  14 keytest1591  keytest1591    448 Apr  1 14:03 .git
+-rw-r--r--   1 keytest1591  keytest1591     67 Apr  1 15:47 Dockerfile
+-rw-r--r--   1 keytest1591  keytest1591  18921 Apr  1 15:29 README copy.md
+-rw-r--r--   1 keytest1591  keytest1591  22674 Apr  1 15:36 README.md
+-rw-r--r--   1 keytest1591  keytest1591     22 Apr  1 15:47 index.html
+drwxr-xr-x   3 keytest1591  keytest1591     96 Apr  1 13:59 요구사항
+keytest1591@c3r1s7 E1-1 % docker build -t my-web:1.0 .
+[+] Building 8.2s (7/7) FINISHED                                                                                   docker:orbstack
+ => [internal] load build definition from Dockerfile                                                                          0.1s
+ => => transferring dockerfile: 104B                                                                                          0.0s
+ => [internal] load metadata for docker.io/library/nginx:alpine                                                               2.7s
+ => [internal] load .dockerignore                                                                                             0.2s
+ => => transferring context: 2B                                                                                               0.0s
+ => [internal] load build context                                                                                             0.3s
+ => => transferring context: 59B                                                                                              0.0s
+ => [1/2] FROM docker.io/library/nginx:alpine@sha256:e7257f1ef28ba17cf7c248cb8ccf6f0c6e0228ab9c315c152f9c203cd34cf6d1         4.3s
+ => => resolve docker.io/library/nginx:alpine@sha256:e7257f1ef28ba17cf7c248cb8ccf6f0c6e0228ab9c315c152f9c203cd34cf6d1         0.3s
+ => => sha256:7e89aa6cabfc80f566b1b77b981f4bb98413bd2d513ca9a30f63fe58b4af6903 2.50kB / 2.50kB                                0.0s
+ => => sha256:91d1c9c22f2c631288354fadb2decc448ce151d7a197c167b206588e09dcd50a 626B / 626B                                    0.5s
+ => => sha256:e7257f1ef28ba17cf7c248cb8ccf6f0c6e0228ab9c315c152f9c203cd34cf6d1 10.33kB / 10.33kB                              0.0s
+ => => sha256:d5030d429039a823bef4164df2fad7a0defb8d00c98c1136aec06701871197c2 12.32kB / 12.32kB                              0.0s
+ => => sha256:8892f80f46a05d59a4cde3bcbb1dd26ed2441d4214870a4a7b318eaa476a0a54 1.87MB / 1.87MB                                0.9s
+ => => sha256:589002ba0eaed121a1dbf42f6648f29e5be55d5c8a6ee0f8eaa0285cc21ac153 3.86MB / 3.86MB                                0.8s
+ => => sha256:cf1159c696ee2a72b85634360dbada071db61bceaad253db7fda65c45a58414c 953B / 953B                                    1.1s
+ => => extracting sha256:589002ba0eaed121a1dbf42f6648f29e5be55d5c8a6ee0f8eaa0285cc21ac153                                     0.1s
+ => => sha256:3f4ad4352d4f91018e2b4910b9db24c08e70192c3b75d0d6fff0120c838aa0bb 402B / 402B                                    1.3s
+ => => extracting sha256:8892f80f46a05d59a4cde3bcbb1dd26ed2441d4214870a4a7b318eaa476a0a54                                     0.1s
+ => => sha256:c2bd5ab177271dd59f19a46c214b1327f5c428cd075437ec0155ae71d0cdadc1 1.21kB / 1.21kB                                1.4s
+ => => sha256:4d9d41f3822d171ccc5f2cdfd75ad846ac4c7ed1cd36fb998fe2c0ce4501647b 1.40kB / 1.40kB                                1.6s
+ => => extracting sha256:91d1c9c22f2c631288354fadb2decc448ce151d7a197c167b206588e09dcd50a                                     0.0s
+ => => extracting sha256:cf1159c696ee2a72b85634360dbada071db61bceaad253db7fda65c45a58414c                                     0.0s
+ => => extracting sha256:3f4ad4352d4f91018e2b4910b9db24c08e70192c3b75d0d6fff0120c838aa0bb                                     0.0s
+ => => sha256:3370263bc02adcf5c4f51831d2bf1d54dbf9a6a80b0bf32c5c9b9400630eaa08 20.25MB / 20.25MB                              2.4s
+ => => extracting sha256:c2bd5ab177271dd59f19a46c214b1327f5c428cd075437ec0155ae71d0cdadc1                                     0.0s
+ => => extracting sha256:4d9d41f3822d171ccc5f2cdfd75ad846ac4c7ed1cd36fb998fe2c0ce4501647b                                     0.0s
+ => => extracting sha256:3370263bc02adcf5c4f51831d2bf1d54dbf9a6a80b0bf32c5c9b9400630eaa08                                     0.5s
+ => [2/2] COPY index.html /usr/share/nginx/html/index.html                                                                    0.3s
+ => exporting to image                                                                                                        0.2s
+ => => exporting layers                                                                                                       0.1s
+ => => writing image sha256:cef068316842e2722df2e73598590749dac25299aa2e8dd2fb62ab8b59dfea28                                  0.0s
+ => => naming to docker.io/library/my-web:1.0                                                                                 0.0s
+keytest1591@c3r1s7 E1-1 % 
+keytest1591@c3r1s7 E1-1 % docker run -d -p 8080:80 --name my-web my-web:1.0
+268883371e018f4f82fbf35a2a7c15ce3c02075e681efd712c27d57f01531141
+keytest1591@c3r1s7 E1-1 % docker ps
+CONTAINER ID   IMAGE        COMMAND                  CREATED          STATUS          PORTS                                     NAMES
+268883371e01   my-web:1.0   "/docker-entrypoint.…"   13 seconds ago   Up 12 seconds   0.0.0.0:8080->80/tcp, [::]:8080->80/tcp   my-web
+keytest1591@c3r1s7 E1-1 % docker logs my-web
+/docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
+/docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
+/docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
+10-listen-on-ipv6-by-default.sh: info: Getting the checksum of /etc/nginx/conf.d/default.conf
+10-listen-on-ipv6-by-default.sh: info: Enabled listen on IPv6 in /etc/nginx/conf.d/default.conf
+/docker-entrypoint.sh: Sourcing /docker-entrypoint.d/15-local-resolvers.envsh
+/docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
+/docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
+/docker-entrypoint.sh: Configuration complete; ready for start up
+2026/04/01 06:48:47 [notice] 1#1: using the "epoll" event method
+2026/04/01 06:48:47 [notice] 1#1: nginx/1.29.7
+2026/04/01 06:48:47 [notice] 1#1: built by gcc 15.2.0 (Alpine 15.2.0) 
+2026/04/01 06:48:47 [notice] 1#1: OS: Linux 6.17.8-orbstack-00308-g8f9c941121b1
+2026/04/01 06:48:47 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 20480:1048576
+2026/04/01 06:48:47 [notice] 1#1: start worker processes
+2026/04/01 06:48:47 [notice] 1#1: start worker process 30
+2026/04/01 06:48:47 [notice] 1#1: start worker process 31
+2026/04/01 06:48:47 [notice] 1#1: start worker process 32
+2026/04/01 06:48:47 [notice] 1#1: start worker process 33
+2026/04/01 06:48:47 [notice] 1#1: start worker process 34
+2026/04/01 06:48:47 [notice] 1#1: start worker process 35
+keytest1591@c3r1s7 E1-1 % 
+
+```
+
+트러블슈팅:
+
+### 사례 1. `Dockerfile: no such file or directory`
+
+* 문제: `docker build -t my-web:1.0 .` 실행 시 `failed to read dockerfile: open Dockerfile: no such file or directory` 오류 발생
+* 원인 가설: 현재 디렉토리에 `Dockerfile`이 없거나, `docker build`를 잘못된 위치에서 실행했을 가능성
+* 확인:
+
+```bash
+pwd
+ls -la
+find . -maxdepth 2 -name Dockerfile
+```
+
+* 해결/대안:
+  현재 디렉토리에서 빌드할 경우 `Dockerfile`을 직접 생성한 뒤 다시 빌드한다.
+
+```bash
+cat > Dockerfile <<'EOF'
+FROM nginx:alpine
+COPY index.html /usr/share/nginx/html/index.html
+EOF
+
+cat > index.html <<'EOF'
+<h1>Hello Docker</h1>
+EOF
+
+docker build -t my-web:1.0 .
 ```
 
 ## 7. 포트 매핑 검증
@@ -388,34 +730,127 @@ curl http://localhost:8080
 실습 후 교체:
 
 ```bash
-# 여기에 curl 응답 또는 브라우저 접속 증거 설명을 붙여넣는다.
+keytest1591@c3r1s7 E1-1 % curl http://localhost:8080
+<h1>Hello Docker</h1>
+keytest1591@c3r1s7 E1-1 % 
 ```
 
 해설:
 
 * 브라우저 증거를 사용할 경우 주소창과 포트 번호가 함께 보여야 한다.
+*  docker run -d -p 8080:80 --name my-web my-web:1.0 
+  - run	새로운 컨테이너 실행
+  - -d	백그라운드 모드 (detached)
+  - -p 8080:80	포트 매핑 (호스트:컨테이너)
+  - --name my-web	컨테이너 이름 설정
+  - my-web:1.0	이미지 이름:태그
+    # → 호스트의 8080으로 접속하면
+    # → 컨테이너의 80번 포트로 연결됨
 
 ## 8. Docker 볼륨 영속성 검증
 
 실습할 명령:
 
 ```bash
+# 1) 볼륨 생성
 docker volume create mydata
+
+# 2) 이전 실습 컨테이너 정리
 docker rm -f vol-test vol-test-2 2>/dev/null || true
+
+# 3) 볼륨을 연결한 첫 번째 컨테이너 실행
 docker run -d --name vol-test -v mydata:/data ubuntu sleep infinity
+
+# 4) 컨테이너 내부에 파일 생성
 docker exec vol-test bash -lc "echo hi > /data/hello.txt && cat /data/hello.txt"
+
+# 5) 컨테이너 삭제 전 비교: 파일 존재 여부 확인
+docker exec vol-test bash -lc "ls -l /data && cat /data/hello.txt"
+
+# 6) 첫 번째 컨테이너 삭제
 docker rm -f vol-test
+
+# 7) 같은 볼륨을 연결한 두 번째 컨테이너 실행
 docker run -d --name vol-test-2 -v mydata:/data ubuntu sleep infinity
-docker exec vol-test-2 bash -lc "cat /data/hello.txt"
+
+# 8) 컨테이너 삭제 후 비교: 같은 파일이 유지되는지 확인
+docker exec vol-test-2 bash -lc "ls -l /data && cat /data/hello.txt"
+
+# 9) 볼륨 정보 확인
+docker volume inspect mydata
+
+# 10) 실습 후 정리
+docker rm -f vol-test-2
 ```
 
 실습 후 교체:
 
 ```bash
-# 여기에 실제 영속성 검증 로그를 붙여넣는다.
+keytest1591@c3r1s7 E1-1 % 
+keytest1591@c3r1s7 E1-1 % docker volume create mydata
+mydata
+keytest1591@c3r1s7 E1-1 % docker rm -f vol-test vol-test-2 2>/dev/null || true
+vol-test
+keytest1591@c3r1s7 E1-1 % docker run -d --name vol-test -v mydata:/data ubuntu sleep infinity
+18258cafc03045e2f4e10538555f6b81a5f98a5bf063b4e40f33286b3358936d
+keytest1591@c3r1s7 E1-1 % docker exec vol-test bash -lc "echo hi > /data/hello.txt && cat /data/hello.txt"
+hi
+keytest1591@c3r1s7 E1-1 % docker exec vol-test bash -lc "ls -l /data && cat /data/hello.txt"
+total 4
+-rw-r--r-- 1 root root 3 Apr  1 08:55 hello.txt
+hi
+keytest1591@c3r1s7 E1-1 % docker exec -it vol-test bash
+root@18258cafc030:/# ls -la /data
+total 4
+drwxr-xr-x 1 root root 18 Apr  1 08:48 .
+drwxr-xr-x 1 root root 14 Apr  1 08:55 ..
+-rw-r--r-- 1 root root  3 Apr  1 08:55 hello.txt
+root@18258cafc030:/# cat /data/hello.txt
+hi
+root@18258cafc030:/# exit
+exit
+keytest1591@c3r1s7 E1-1 % 
+keytest1591@c3r1s7 E1-1 % 
+keytest1591@c3r1s7 E1-1 % docker rm -f vol-test
+vol-test
+keytest1591@c3r1s7 E1-1 % docker run -d --name vol-test-2 -v mydata:/data ubuntu sleep infinity
+b5e438d3856c3ba834fb1947d9143627ed8637112f70f5bf01bdc18b6af3a8ed
+keytest1591@c3r1s7 E1-1 % docker exec vol-test-2 bash -lc "ls -l /data && cat /data/hello.txt"
+total 4
+-rw-r--r-- 1 root root 3 Apr  1 08:55 hello.txt
+hi
+keytest1591@c3r1s7 E1-1 % docker volume inspect mydata
+[
+    {
+        "CreatedAt": "2026-04-01T17:46:27+09:00",
+        "Driver": "local",
+        "Labels": null,
+        "Mountpoint": "/var/lib/docker/volumes/mydata/_data",
+        "Name": "mydata",
+        "Options": null,
+        "Scope": "local"
+    }
+]
+keytest1591@c3r1s7 E1-1 % docker rm -f vol-test-2
+vol-test-2
+keytest1591@c3r1s7 E1-1 % 
+
+
 ```
 
-## 9. Git 설정 및 GitHub 연동
+간단 정리:
+* 볼륨 생성 명령: `docker volume create mydata`
+* 볼륨 연결 명령: `docker run -d --name vol-test -v mydata:/data ubuntu sleep infinity`
+* 볼륨 검증 명령: `docker exec ... ls -l /data`, `docker exec ... cat /data/hello.txt`, `docker volume inspect mydata`
+* 컨테이너 삭제 전 비교: `vol-test` 안에서 `/data/hello.txt`가 보이는지 확인
+* 컨테이너 삭제 후 비교: `vol-test-2` 안에서도 같은 파일이 그대로 보이는지 확인
+* `attach`는 메인 프로세스에 연결하는 개념이다.
+* `exec`는 실행 중인 컨테이너 안에서 새 명령을 여는 개념이다.
+* 핵심 결론: 컨테이너를 삭제해도 볼륨 `mydata`가 유지되면 데이터는 사라지지 않는다.
+  
+
+
+## 9. Git 설정 및 GitHub/VSCode 연동 증거
 
 실습할 명령:
 
@@ -430,8 +865,40 @@ git remote -v
 실습 후 교체:
 
 ```bash
-# 여기에 실제 출력 결과를 붙여넣는다.
-# 민감정보가 있다면 마스킹한다.
+keytest1591@c3r1s7 E1-1 % 
+keytest1591@c3r1s7 E1-1 % git config --global user.name
+keytest1591@c3r1s7 E1-1 % git config --global user.name ***** 
+keytest1591@c3r1s7 E1-1 % git config --global user.name
+*****
+keytest1591@c3r1s7 E1-1 % git config --global user.email "****************"
+keytest1591@c3r1s7 E1-1 % 
+keytest1591@c3r1s7 E1-1 % 
+keytest1591@c3r1s7 E1-1 % git config user.name
+zzxy72
+keytest1591@c3r1s7 E1-1 % git config user.email
+keytest@naver.com
+keytest1591@c3r1s7 E1-1 % git config init.defaultBranch
+keytest1591@c3r1s7 E1-1 % git config --list
+credential.helper=osxkeychain
+credential.https://github.com.helper=
+credential.https://github.com.helper=!/Users/keytest1591/.local/bin/gh auth git-credential
+credential.https://gist.github.com.helper=
+credential.https://gist.github.com.helper=!/Users/keytest1591/.local/bin/gh auth git-credential
+user.name=zzxy72
+user.email=keytest@naver.com
+core.repositoryformatversion=0
+core.filemode=true
+core.bare=false
+core.logallrefupdates=true
+core.ignorecase=true
+core.precomposeunicode=true
+remote.origin.url=https://github.com/zzxy72/E1-1.git
+remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*
+branch.main.remote=origin
+branch.main.merge=refs/heads/main
+branch.main.vscode-merge-base=origin/main
+keytest1591@c3r1s7 E1-1 % 
+
 ```
 
 추가 첨부:
@@ -440,12 +907,8 @@ git remote -v
 
 ## 10. 트러블슈팅
 
-### 사례 1
+### 사례 1 은 앞의 `Dockerfile: no such file or directory` 를 참고.
 
-* 문제: `실습 후 교체`
-* 원인 가설: `실습 후 교체`
-* 확인 방법: `실습 후 교체`
-* 해결 또는 대안: `실습 후 교체`
 
 ### 사례 2
 
