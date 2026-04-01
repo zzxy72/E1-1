@@ -2,8 +2,7 @@
 
 ## 프로젝트 개요
 
-이 문서는 터미널, Docker, Git/GitHub를 이용해 개발 워크스테이션을 구축하고 검증한 결과를 정리한 README다.  
-과제 요구사항에 맞춰 필요한 실습만 기록하며, `실습 후 교체` 구간은 실제 실행 로그로 바꿔 작성한다.
+이 문서는 터미널, Docker, Git/GitHub를 이용해 개발 워크스테이션을 구축하고 검증한 결과를 정리한 README다.
 
 ## 실행 환경
 
@@ -16,9 +15,9 @@
 | Docker 실행 환경 | OrbStack |
 | Docker Version | `28.5.2, build ecc6942` |
 | Git Version | `2.53.0` |
-| GitHub 연동 방식 | `HTTPS 또는 SSH로 실습 후 교체` |
+| GitHub 연동 방식 | `HTTPS` |
 
-실습 후 교체:
+실습:
 
 ```bash
 sw_vers
@@ -31,17 +30,17 @@ git --version
 ## 수행 체크리스트
 
 * [x] 터미널 기본 조작 수행
-* [ ] 파일 권한 변경 실습
-* [ ] 디렉토리 권한 변경 실습
-* [ ] Docker 설치 및 점검
-* [ ] Docker 기본 운영 명령 수행
-* [ ] `hello-world` 실행
-* [ ] `ubuntu` 컨테이너 내부 진입
-* [ ] Dockerfile 기반 커스텀 이미지 빌드 및 실행
-* [ ] 포트 매핑 접속 확인
-* [ ] Docker 볼륨 영속성 검증
-* [ ] Git 설정 및 GitHub 연동
-* [ ] 트러블슈팅 2건 이상 정리
+* [x] 파일 권한 변경 실습
+* [x] 디렉토리 권한 변경 실습
+* [x] Docker 설치 및 점검
+* [x] Docker 기본 운영 명령 수행
+* [x] `hello-world` 실행
+* [x] `ubuntu` 컨테이너 내부 진입
+* [x] Dockerfile 기반 커스텀 이미지 빌드 및 실행
+* [x] 포트 매핑 접속 확인
+* [x] Docker 볼륨 영속성 검증
+* [x] Git 설정 및 GitHub 연동
+* [x] 트러블슈팅 2건 이상 정리
 
 ## 검증 방법
 
@@ -77,7 +76,7 @@ cd ..
 rm -rf practice-dir
 ```
 
-실습 후 교체:
+실습:
 
 ```bash
 ***@*** E1-1 % pwd
@@ -121,7 +120,7 @@ ls -ld permission-lab
 ls -l permission-lab/file.txt
 ```
 
-실습 후 교체:
+실습:
 
 ```bash
 ***@*** E1-1 % mkdir -p permission-lab
@@ -154,7 +153,7 @@ drwxr-xr-x  3 ***  ***  96 Mar 31 20:06 permission-lab
 
 ```
 
-해설:
+확인 결과:
 
 * 파일 1개와 디렉토리 1개 모두 전후 비교가 보여야 한다.
 * `755`는 디렉토리 예시, `644`는 파일 예시로 쓰기 좋다.
@@ -168,7 +167,7 @@ docker --version
 docker info
 ```
 
-실습 후 교체:
+실습:
 
 ```bash
 ***@*** E1-1 % docker --version
@@ -289,7 +288,7 @@ docker logs hello-test
 docker stats --no-stream
 ```
 
-실습 후 교체:
+실습:
 
 ```bash
 keytest1591@c3r1s7 E1-1 % 
@@ -361,7 +360,7 @@ keytest1591@c3r1s7 E1-1 %
 
 ```
 
-해설:
+확인 결과:
 * docker pull hello-world 이 명령어는 Docker Hub(온라인 저장소)에서 'hello-world'라는 이미지를 다운로드하는 것입니다.
 * `hello-world`는 Docker 공식 테스트용 이미지다.
 * docker images 이 명령어는 당신의 컴퓨터에 저장된 모든 Docker 이미지를 목록으로 보여줍니다.
@@ -396,7 +395,7 @@ docker logs hello-test
 
 ```
 
-실습 후 교체:
+실습:
 
 ```bash
 keytest1591@c3r1s7 E1-1 % 
@@ -469,7 +468,7 @@ exit
 docker ps -a
 ```
 
-실습 후 교체:
+실습:
 
 ```bash
 keytest1591@c3r1s7 E1-1 % 
@@ -579,7 +578,7 @@ docker ps
 docker logs my-web
 ```
 
-실습 후 교체:
+실습:
 
 ```bash
 keytest1591@c3r1s7 E1-1 % 
@@ -595,7 +594,7 @@ keytest1591@c3r1s7 E1-1 %
 keytest1591@c3r1s7 E1-1 % pwd
 ls -la
 find . -maxdepth 2 -name Dockerfile
-/Users/keytest1591/E1-1
+/Users/***/E1-1
 total 88
 drwxr-xr-x   6 keytest1591  keytest1591    192 Apr  1 15:29 .
 drwxr-x---+ 24 keytest1591  keytest1591    768 Apr  1 14:20 ..
@@ -727,7 +726,7 @@ docker build -t my-web:1.0 .
 curl http://localhost:8080
 ```
 
-실습 후 교체:
+실습:
 
 ```bash
 keytest1591@c3r1s7 E1-1 % curl http://localhost:8080
@@ -735,55 +734,30 @@ keytest1591@c3r1s7 E1-1 % curl http://localhost:8080
 keytest1591@c3r1s7 E1-1 % 
 ```
 
-해설:
+확인 결과:
 
 * 브라우저 증거를 사용할 경우 주소창과 포트 번호가 함께 보여야 한다.
-*  docker run -d -p 8080:80 --name my-web my-web:1.0 
-  - run	새로운 컨테이너 실행
-  - -d	백그라운드 모드 (detached)
-  - -p 8080:80	포트 매핑 (호스트:컨테이너)
-  - --name my-web	컨테이너 이름 설정
-  - my-web:1.0	이미지 이름:태그
-    # → 호스트의 8080으로 접속하면
-    # → 컨테이너의 80번 포트로 연결됨
+* `docker run -d -p 8080:80 --name my-web my-web:1.0` 명령으로 호스트 `8080` 포트를 컨테이너 `80` 포트에 연결했다.
+* `curl http://localhost:8080` 결과로 컨테이너 내부 `index.html` 응답을 확인했다.
 
 ## 8. Docker 볼륨 영속성 검증
 
 실습할 명령:
 
 ```bash
-# 1) 볼륨 생성
 docker volume create mydata
-
-# 2) 이전 실습 컨테이너 정리
 docker rm -f vol-test vol-test-2 2>/dev/null || true
-
-# 3) 볼륨을 연결한 첫 번째 컨테이너 실행
 docker run -d --name vol-test -v mydata:/data ubuntu sleep infinity
-
-# 4) 컨테이너 내부에 파일 생성
 docker exec vol-test bash -lc "echo hi > /data/hello.txt && cat /data/hello.txt"
-
-# 5) 컨테이너 삭제 전 비교: 파일 존재 여부 확인
 docker exec vol-test bash -lc "ls -l /data && cat /data/hello.txt"
-
-# 6) 첫 번째 컨테이너 삭제
 docker rm -f vol-test
-
-# 7) 같은 볼륨을 연결한 두 번째 컨테이너 실행
 docker run -d --name vol-test-2 -v mydata:/data ubuntu sleep infinity
-
-# 8) 컨테이너 삭제 후 비교: 같은 파일이 유지되는지 확인
 docker exec vol-test-2 bash -lc "ls -l /data && cat /data/hello.txt"
-
-# 9) 볼륨 정보 확인
 docker volume inspect mydata
-
-# 10) 실습 후 정리
 docker rm -f vol-test-2
 ```
 
-실습 후 교체:
+실습:
 
 ```bash
 keytest1591@c3r1s7 E1-1 % 
@@ -838,7 +812,7 @@ keytest1591@c3r1s7 E1-1 %
 
 ```
 
-간단 정리:
+정리:
 * 볼륨 생성 명령: `docker volume create mydata`
 * 볼륨 연결 명령: `docker run -d --name vol-test -v mydata:/data ubuntu sleep infinity`
 * 볼륨 검증 명령: `docker exec ... ls -l /data`, `docker exec ... cat /data/hello.txt`, `docker volume inspect mydata`
@@ -850,7 +824,7 @@ keytest1591@c3r1s7 E1-1 %
   
 
 
-## 9. Git 설정 및 GitHub/VSCode 연동 증거
+## 9. Git 설정 및 GitHub/VSCode 연동
 
 실습할 명령:
 
@@ -858,67 +832,56 @@ keytest1591@c3r1s7 E1-1 %
 git config --global user.name
 git config --global user.email
 git config --global init.defaultBranch
-git config --list
+git config --list | grep -E "user.name|user.email|remote.origin.url|branch.main"
 git remote -v
 ```
 
-실습 후 교체:
+실습:
 
 ```bash
-keytest1591@c3r1s7 E1-1 % 
-keytest1591@c3r1s7 E1-1 % git config --global user.name
-keytest1591@c3r1s7 E1-1 % git config --global user.name ***** 
-keytest1591@c3r1s7 E1-1 % git config --global user.name
-*****
-keytest1591@c3r1s7 E1-1 % git config --global user.email "****************"
-keytest1591@c3r1s7 E1-1 % 
-keytest1591@c3r1s7 E1-1 % 
-keytest1591@c3r1s7 E1-1 % git config user.name
+***@*** E1-1 % git config --global user.name
 zzxy72
-keytest1591@c3r1s7 E1-1 % git config user.email
-keytest@naver.com
-keytest1591@c3r1s7 E1-1 % git config init.defaultBranch
-keytest1591@c3r1s7 E1-1 % git config --list
-credential.helper=osxkeychain
-credential.https://github.com.helper=
-credential.https://github.com.helper=!/Users/keytest1591/.local/bin/gh auth git-credential
-credential.https://gist.github.com.helper=
-credential.https://gist.github.com.helper=!/Users/keytest1591/.local/bin/gh auth git-credential
+***@*** E1-1 % git config --global user.email
+k*****@naver.com
+***@*** E1-1 % git config --global init.defaultBranch
+***@*** E1-1 % git config --list | grep -E "user.name|user.email|remote.origin.url|branch.main"
 user.name=zzxy72
-user.email=keytest@naver.com
-core.repositoryformatversion=0
-core.filemode=true
-core.bare=false
-core.logallrefupdates=true
-core.ignorecase=true
-core.precomposeunicode=true
+user.email=k*****@naver.com
 remote.origin.url=https://github.com/zzxy72/E1-1.git
-remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*
 branch.main.remote=origin
 branch.main.merge=refs/heads/main
 branch.main.vscode-merge-base=origin/main
-keytest1591@c3r1s7 E1-1 % 
-
+***@*** E1-1 % git remote -v
+origin  https://github.com/zzxy72/E1-1.git (fetch)
+origin  https://github.com/zzxy72/E1-1.git (push)
 ```
 
-추가 첨부:
+확인 결과:
 
-* VSCode GitHub 로그인 화면 또는 저장소 연동 화면
+* Git 전역 사용자 정보는 `user.name`, `user.email` 값으로 확인했다.
+* 현재 저장소는 `origin` 원격 저장소에 연결되어 있으며, 원격 주소는 `https://github.com/zzxy72/E1-1.git` 이다.
+* VSCode 소스 제어 화면에서 `main` 브랜치와 `origin/main` 연결 상태를 추가로 확인했다.
+* `git config --global init.defaultBranch` 는 별도 출력이 없었지만, 현재 저장소 기준 기본 작업 브랜치는 `main` 으로 확인된다.
 
 ## 10. 트러블슈팅
 
-### 사례 1 은 앞의 `Dockerfile: no such file or directory` 를 참고.
+### 사례 1. `Dockerfile: no such file or directory`
 
+* 문제: `docker build -t my-web:1.0 .` 실행 시 `failed to read dockerfile: open Dockerfile: no such file or directory` 오류가 발생했다.
+* 원인 가설: 현재 디렉토리에 `Dockerfile` 이 없거나 잘못된 위치에서 빌드를 실행했을 가능성이 있었다.
+* 확인 방법: `pwd`, `ls -la`, `find . -maxdepth 2 -name Dockerfile` 로 현재 위치와 파일 존재 여부를 점검했다.
+* 해결 또는 대안: 현재 디렉토리에 `Dockerfile` 과 `index.html` 을 만든 뒤 다시 `docker build -t my-web:1.0 .` 를 실행해 이미지를 정상적으로 빌드했다.
 
-### 사례 2
+### 사례 2. VSCode 커밋이 지연되는 것처럼 보인 경우
 
-* 문제: `실습 후 교체`
-* 원인 가설: `실습 후 교체`
-* 확인 방법: `실습 후 교체`
-* 해결 또는 대안: `실습 후 교체`
+* 문제: VSCode에서 커밋 버튼을 눌렀는데 즉시 완료되지 않고 오래 걸리는 것처럼 보였다.
+* 원인 가설: 커밋이 멈춘 것이 아니라 `.git/COMMIT_EDITMSG` 파일이 열리면서 커밋 메시지 입력을 기다리는 상태였다.
+* 확인 방법: VSCode 편집 창에 `.git/COMMIT_EDITMSG` 탭이 열려 있고, 상단에 커밋 메시지를 입력하라는 안내 문구가 표시되는지 확인했다.
+* 해결 또는 대안: 파일 첫 줄에 커밋 메시지를 입력한 뒤 저장하여 커밋을 완료했다. 이후에는 소스 제어 입력창에 메시지를 먼저 작성한 다음 `Commit` 버튼을 누르면 같은 상황을 줄일 수 있다.
 
 ## 11. 보안 점검
 
 * 토큰, 비밀번호, 개인키, 인증 코드를 기록하지 않는다.
+* 이메일 주소, 로컬 계정명, 호스트명은 필요 시 일부 마스킹해서 기록한다.
 * 브라우저 캡처에는 주소창과 포트가 보이게 한다.
 * 실제 실행한 로그만 기록한다.
