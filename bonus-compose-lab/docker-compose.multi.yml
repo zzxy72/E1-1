@@ -1,0 +1,19 @@
+services:
+  web:
+    build:
+      context: ./app
+    ports:
+      - "${WEB_PORT:-8082}:${APP_PORT:-8000}"
+    environment:
+      APP_PORT: "${APP_PORT:-8000}"
+      APP_MODE: "${APP_MODE:-multi}"
+      HELPER_URL: "${HELPER_URL:-http://helper:9000}"
+    depends_on:
+      - helper
+
+  helper:
+    build:
+      context: ./helper
+    environment:
+      HELPER_PORT: "${HELPER_PORT:-9000}"
+      HELPER_MESSAGE: "${HELPER_MESSAGE:-Hello from helper service}"
