@@ -818,7 +818,6 @@ keytest1591@c3r1s7 E1-1 %
 * 볼륨 검증 명령: `docker exec ... ls -l /data`, `docker exec ... cat /data/hello.txt`, `docker volume inspect mydata`
 * 컨테이너 삭제 전 비교: `vol-test` 안에서 `/data/hello.txt`가 보이는지 확인
 * 컨테이너 삭제 후 비교: `vol-test-2` 안에서도 같은 파일이 그대로 보이는지 확인
-* `attach`는 메인 프로세스에 연결하는 개념이다.
 * `exec`는 실행 중인 컨테이너 안에서 새 명령을 여는 개념이다.
 * 핵심 결론: 컨테이너를 삭제해도 볼륨 `mydata`가 유지되면 데이터는 사라지지 않는다.
   
