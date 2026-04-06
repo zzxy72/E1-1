@@ -9,11 +9,15 @@ services:
       APP_MODE: "${APP_MODE:-multi}"
       HELPER_URL: "${HELPER_URL:-http://helper:9000}"
     depends_on:
-      - helper
+      - helper # ← "helper가 먼저 시작되어야 해!"
 
-  helper:
+  helper:   # ← 이 이름이 Docker 내부 DNS 서버가 자동으로 등록하는 서비스 이름이자, web 서비스에서 참조하는 이름이기도 함
+   # depends_on이 없음 → 의존성 없음
     build:
       context: ./helper
+    image: my-helper:1.0     # ← 이미지 이름 지정!
+#    ports:                              # ← 추가!
+#      - "${HELPER_PORT:-9000}:9000"    # 포드보고싶은 경우 ← 추가!
     environment:
       HELPER_PORT: "${HELPER_PORT:-9000}"
       HELPER_MESSAGE: "${HELPER_MESSAGE:-Hello from helper service}"
