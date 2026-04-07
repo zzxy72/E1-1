@@ -496,6 +496,46 @@ f375ae595e47   ubuntu        "bash"     About a minute ago   Exited (0) 21 secon
 849e87b44b28   hello-world   "/hello"   18 minutes ago       Exited (0) 18 minutes ago             hello-test
 keytest1591@c3r1s7 E1-1 % 
 
+
+------ attach 실습. -- docker attach (기존 프로세스 연결)
+keytest1591@c3r3s7 temp % docker start ubuntu
+ubuntu
+
+keytest1591@c3r3s7 temp % docker ps     
+CONTAINER ID   IMAGE     COMMAND   CREATED      STATUS              PORTS     NAMES
+bbfa95d6ef4a   ubuntu    "bash"    2 days ago   Up About a minute             ubuntu
+keytest1591@c3r3s7 temp % docker attach unbuntu
+Error response from daemon: No such container: unbuntu
+keytest1591@c3r3s7 temp % docker attach ubuntu 
+root@bbfa95d6ef4a:/# 
+root@bbfa95d6ef4a:/# ls -l
+total 16
+lrwxrwxrwx   1 root root   7 Apr 22  2024 bin -> usr/bin
+drwxr-xr-x   1 root root   0 Apr 22  2024 boot
+drwxr-xr-x   5 root root 340 Apr  7 08:27 dev
+drwxr-xr-x   1 root root  56 Apr  5 05:30 etc
+drwxr-xr-x   1 root root  12 Feb 17 02:09 home
+lrwxrwxrwx   1 root root   7 Apr 22  2024 lib -> usr/lib
+lrwxrwxrwx   1 root root   9 Apr 22  2024 lib64 -> usr/lib64
+drwxr-xr-x   1 root root   0 Feb 17 02:02 media
+drwxr-xr-x   1 root root   0 Feb 17 02:02 mnt
+drwxr-xr-x   1 root root   0 Feb 17 02:02 opt
+dr-xr-xr-x 223 root root   0 Apr  7 08:27 proc
+drwx------   1 root root  26 Apr  5 05:30 root
+drwxr-xr-x   1 root root  22 Feb 17 02:09 run
+lrwxrwxrwx   1 root root   8 Apr 22  2024 sbin -> usr/sbin
+drwxr-xr-x   1 root root   0 Feb 17 02:02 srv
+dr-xr-xr-x  11 root root   0 Apr  7 08:27 sys
+drwxrwxrwt   1 root root   0 Feb 17 02:09 tmp
+drwxr-xr-x   1 root root  10 Feb 17 02:02 usr
+drwxr-xr-x   1 root root  90 Feb 17 02:09 var
+root@bbfa95d6ef4a:/# exit
+exit
+keytest1591@c3r3s7 temp % 
+keytest1591@c3r3s7 temp % docker ps            
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+keytest1591@c3r3s7 temp % 
+
 ```
 
 간단 정리:
