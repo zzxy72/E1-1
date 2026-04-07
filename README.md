@@ -779,6 +779,7 @@ keytest1591@c3r1s7 E1-1 %
 * 브라우저 증거를 사용할 경우 주소창과 포트 번호가 함께 보여야 한다.
 * `docker run -d -p 8080:80 --name my-web my-web:1.0` 명령으로 호스트 `8080` 포트를 컨테이너 `80` 포트에 연결했다.
 * `curl http://localhost:8080` 결과로 컨테이너 내부 `index.html` 응답을 확인했다.
+* 참고 명령: lsof -i :8080 해당 포드 사용중인지 확인.  (netstat -an | grep 8080)
 
 ## 8. Docker 볼륨 영속성 검증
 
